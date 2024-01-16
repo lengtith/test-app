@@ -133,20 +133,22 @@ const Products = () => {
                 alert("Successfully")
                 console.log(res.data);
             }
+
+            if (res.status === 400) {
+                console.log(res.message);
+            }
         } catch (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
-                console.error("Server responded with an error status:", error.response.status);
-                console.error("Response data:", error.response.data);
-                console.error("Response headers:", error.response.headers);
+                console.info("Response data:", error.response.data);
             } else if (error.request) {
                 // The request was made but no response was received
                 // `error.request` is an instance of XMLHttpRequest in the browser
-                console.error("No response received:", error.request);
+                console.info("No response received:", error.request);
             } else {
                 // Something happened in setting up the request that triggered an Error
-                console.error("Error during request setup:", error.message);
+                console.info("Error during request setup:", error.message);
             }
         }
     }
