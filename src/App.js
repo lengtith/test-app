@@ -1,11 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
+
+import Products from "./pages/Products";
+import Login from "./pages/Login";
+import Welcome from "./pages/Welcome";
+import ProductUpdate from "./pages/ProductUpdate";
 
 function App() {
   return (
     <div className="App">
-      <div className="flex items-center justify-between bg-gray-300 p-5 mb-5">
+      <div className="flex items-center justify-between bg-gray-300 p-5">
         <div className="flex gap-4">
           <Link to='/'>Welcome</Link>
           <Link to='/products'>Products</Link>
@@ -30,6 +35,14 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <Routes>
+        <Route index path="/" element={<Welcome />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:slug" element={<ProductUpdate />} />
+      </Routes>
+
     </div>
   );
 }
