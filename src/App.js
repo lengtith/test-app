@@ -31,7 +31,7 @@ function App() {
           <Link to='/products'>Products</Link>
         </div>
         <div className="flex items-center gap-4">
-          <Link to='/'>Login</Link>
+          <Link to='/login'>Login</Link>
           <button className="px-3 py-2 rounded-lg bg-red-600 text-white" onClick={handleLogout}>Logout</button>
         </div>
       </div>
