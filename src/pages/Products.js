@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 axios.defaults.withCredentials = true;
-let firstRender = true;
 
 const Products = () => {
     const [selectedImages, setSelectedImages] = useState([]);
@@ -32,10 +31,8 @@ const Products = () => {
     };
 
     useEffect(() => {
-        if (firstRender) {
-            getProducts();
-            firstRender = false;
-        }
+
+        getProducts();
 
         const getUser = async () => {
             try {
@@ -133,10 +130,12 @@ const Products = () => {
         try {
             const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id })
                 .catch(err => console.log(err));
-
-            return res.data;
+            if (res && res.data) {
+                alert("Successfully")
+                console.log(res.data);
+            }
         } catch (error) {
-            console.error(error);
+            console.error(error.message);
         }
     }
 
