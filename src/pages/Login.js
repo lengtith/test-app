@@ -15,22 +15,31 @@ const Login = () => {
     const { name, value } = event.target;
     setAuth({ ...auth, [name]: value });
   };
+
   const handleLogin = async () => {
     try {
       const res = await axios.post('https://lengtith.onrender.com/api/auth/login', { ...auth });
-      const data = await res.data;
+      const data = res.data;
+
+      console.log('Received data:', data);
+
       setCookie("user", data.token, {
-        path: "/", 
+        path: "/",
         httpOnly: true,
         secure: true,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-        sameSite: 'none'
+        sameSite: 'None',
       });
+
+      console.log('Cookie set successfully.');
+
       return data;
     } catch (error) {
-      console.error(error);
+      console.error("Login failed:", error);
+      throw error;
     }
-  }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin().then(() => history("/"));
