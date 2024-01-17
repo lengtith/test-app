@@ -17,7 +17,7 @@ const Login = () => {
   };
   const handleLogin = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/api/auth/login', { ...auth });
+      const res = await axios.post('https://lengtith.onrender.com/api/auth/login', { ...auth });
       const data = await res.data;
       setCookie("token", data.token, { path: "/" });
       return ;
