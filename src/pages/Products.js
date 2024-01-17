@@ -138,28 +138,30 @@ const Products = () => {
     };
 
     const handleFavorite = async (id) => {
+        const token = getCookie('token');
         try {
-            const token = getCookie('token');
-            const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id }, {
-                Authorization: `Bearer ${token}`
-            });
-            if (res && res.data) {
-                alert("Successfully")
-                console.log(res.data);
-            }
+            return alert(token);
+            // const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id }, {
+            //     Authorization: `Bearer ${token}`
+            // });
+            // if (res && res.data) {
+            //     alert("Successfully")
+            //     console.log(res.data);
+            // }
         } catch (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                alert(error.response.data.message);
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser
-                alert("No response received:", error.request);
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                alert("Error during request setup:", error.message);
-            }
+            // if (error.response) {
+            //     // The request was made and the server responded with a status code
+            //     // that falls out of the range of 2xx
+            //     alert(error.response.data.message);
+            // } else if (error.request) {
+            //     // The request was made but no response was received
+            //     // `error.request` is an instance of XMLHttpRequest in the browser
+            //     alert("No response received:", error.request);
+            // } else {
+            //     // Something happened in setting up the request that triggered an Error
+            //     alert("Error during request setup:", error.message);
+            // }
+            return alert(token);
         }
     }
 
