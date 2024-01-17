@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 axios.defaults.withCredentials = true;
 
 const Products = () => {
+    const [cookies] = useCookies(["token"]);
     const [selectedImages, setSelectedImages] = useState([]);
     const [previewImages, setPreviewImages] = useState([]);
     const [products, setProducts] = useState([]);
@@ -128,8 +130,16 @@ const Products = () => {
 
     const handleFavorite = async (id) => {
         try {
-            axios.defaults.headers.common['Cookie'] = document.cookie;
-            const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id });
+            const headers = {
+                'Content-Type': 'application/json',
+                Cookie: cookies.token,
+            };
+
+            const options = {
+                headers: headers,
+            };
+
+            const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id }, options);
             if (res && res.data) {
                 alert("Successfully")
                 console.log(res.data);
