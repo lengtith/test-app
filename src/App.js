@@ -16,7 +16,7 @@ function App() {
       });
 
       if (res.status === 200) {
-        return history("/");
+        return history("/login");
       }
     } catch (error) {
       return new Error("Unable TO Logout. Please try again");
