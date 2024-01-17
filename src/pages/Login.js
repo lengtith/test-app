@@ -19,13 +19,13 @@ const Login = () => {
     try {
       const res = await axios.post('https://lengtith.onrender.com/api/auth/login', { ...auth });
       const data = await res.data;
-      setCookie("token", data.token, {
-        path: "/", 
-        httpOnly: true,
-        secure: true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-        sameSite: 'none'
-      });
+      // setCookie("token", data.token, {
+      //   path: "/", 
+      //   httpOnly: true,
+      //   secure: true,
+      //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+      //   sameSite: 'none'
+      // });
       return;
     } catch (error) {
       console.error(error);
