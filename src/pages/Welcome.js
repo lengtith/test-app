@@ -1,17 +1,16 @@
 import React from 'react'
-import { CookiesProvider, useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import logo from './../logo.svg';
 
 const Welcome = () => {
     const [cookies] = useCookies(["token"]);
     return (
-        <CookiesProvider>
             <div>
-                {cookies.user ? (
+                {cookies.token ? (
                     <header className="App-header">
                         <img src={logo} className="App-logo" alt="logo" />
                         <p>
-                            Cookie: {cookies.user}
+                            Cookie: {cookies.token}
                         </p>
                         <a
                             className="App-link"
@@ -26,7 +25,6 @@ const Welcome = () => {
                     <p>Please Login</p>
                 )}
             </div>
-        </CookiesProvider>
     )
 }
 

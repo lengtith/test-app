@@ -19,7 +19,7 @@ const Products = () => {
     const getProducts = async () => {
         try {
             const res = await axios
-                .get("https://lengtith.onrender.com/api/fashions?page=1&limit=12", {
+                .get("http://localhost:3000/api/fashions?page=1&limit=12", {
                     withCredentials: true,
                 })
                 .catch((err) => console.log(err));
@@ -37,7 +37,7 @@ const Products = () => {
         const getUser = async () => {
             try {
                 const res = await axios
-                    .get("https://lengtith.onrender.com/api/users/user", {
+                    .get("http://localhost:3000/api/users/user", {
                         withCredentials: true,
                     })
                     .catch((err) => console.log(err));
@@ -50,7 +50,7 @@ const Products = () => {
         const getUserinfo = async () => {
             try {
                 const res = await axios
-                    .get("https://lengtith.onrender.com/api/users/info", {
+                    .get("http://localhost:3000/api/users/info", {
                         withCredentials: true,
                     })
                     .catch((err) => console.log(err));
@@ -103,7 +103,7 @@ const Products = () => {
         }
 
         try {
-            const res = await axios.post('https://lengtith.onrender.com/api/fashions', formData).catch(err => console.log(err));
+            const res = await axios.post('http://localhost:3000/api/fashions', formData).catch(err => console.log(err));
             const data = await res.data;
             if (res.status === 400 || res.status === 401) {
                 return `${data.error}`;
@@ -116,7 +116,7 @@ const Products = () => {
 
     const handleRemove = async (id) => {
         try {
-            const res = await axios.delete('https://lengtith.onrender.com/api/fashions/' + id).catch(err => console.log(err));
+            const res = await axios.delete('http://localhost:3000/api/fashions/' + id).catch(err => console.log(err));
             if (res.status === 400 || res.status === 401) {
                 return `${res.data.error}`;
             }
@@ -126,51 +126,26 @@ const Products = () => {
         }
     }
 
-    function getCookie(name) {
-        // Split cookie string and get all individual name=value pairs in an array
-        let cookieArr = document.cookie.split(";");
-        
-        // Loop through the array elements
-        for(let i = 0; i < cookieArr.length; i++) {
-            let cookiePair = cookieArr[i].split("=");
-            
-            /* Removing whitespace at the beginning of the cookie name
-            and compare it with the given string */
-            if(name === cookiePair[0].trim()) {
-                // Decode the cookie value and return
-                return decodeURIComponent(cookiePair[1]);
-            }
-        }
-        
-        // Return null if not found
-        return null;
-    }
-
     const handleFavorite = async (id) => {
-        const token = getCookie("token");
         try {
-            console.log(document.cookie);
-            // const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id }, {
-            //     Authorization: `Bearer ${token}`
-            // });
-            // if (res && res.data) {
-            //     alert("Successfully")
-            //     console.log(res.data);
-            // }
+            const res = await axios.post('http://localhost:3000/api/favorites/', { product: id });
+            if (res && res.data) {
+                alert("Successfully")
+                console.log(res.data);
+            }
         } catch (error) {
-            // if (error.response) {
-            //     // The request was made and the server responded with a status code
-            //     // that falls out of the range of 2xx
-            //     alert(error.response.data.message);
-            // } else if (error.request) {
-            //     // The request was made but no response was received
-            //     // `error.request` is an instance of XMLHttpRequest in the browser
-            //     alert("No response received:", error.request);
-            // } else {
-            //     // Something happened in setting up the request that triggered an Error
-            //     alert("Error during request setup:", error.message);
-            // }
-            console.log(token);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                alert(error.response.data.message);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser
+                alert("No response received:", error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                alert("Error during request setup:", error.message);
+            }
         }
     }
 
@@ -198,7 +173,7 @@ const Products = () => {
                                 <div className='flex justify-between border-2 border-red-600 rounded-lg p-1'>
                                     <div key={index} className='w-fit flex gap-2'>
                                         {product.images.map((previewImage, index) => (
-                                            <img key={index} src={`https://lengtith.onrender.com/uploads/products/` + previewImage} className='w-10 h-10 object-contain object-center' alt={`Preview ${index + 1}`} />
+                                            <img key={index} src={`http://localhost:3000/uploads/products/` + previewImage} className='w-10 h-10 object-contain object-center' alt={`Preview ${index + 1}`} />
                                         ))}
                                     </div>
                                     <div>
