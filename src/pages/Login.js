@@ -24,11 +24,7 @@ const Login = () => {
       console.log('Received data:', data);
 
       setCookie("user", data.token, {
-        path: "/",
-        httpOnly: true,
-        secure: true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-        sameSite: 'None',
+        path: "/"
       });
 
       console.log('Cookie set successfully.');
