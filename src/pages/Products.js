@@ -126,21 +126,30 @@ const Products = () => {
         }
     }
 
-    const getCookie = (name) => {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.startsWith(name + '=')) {
-                return cookie.substring(name.length + 1);
+    function getCookie(name) {
+        // Split cookie string and get all individual name=value pairs in an array
+        let cookieArr = document.cookie.split(";");
+        
+        // Loop through the array elements
+        for(let i = 0; i < cookieArr.length; i++) {
+            let cookiePair = cookieArr[i].split("=");
+            
+            /* Removing whitespace at the beginning of the cookie name
+            and compare it with the given string */
+            if(name === cookiePair[0].trim()) {
+                // Decode the cookie value and return
+                return decodeURIComponent(cookiePair[1]);
             }
         }
-        return '';
-    };
+        
+        // Return null if not found
+        return null;
+    }
 
     const handleFavorite = async (id) => {
-        const token = getCookie('token');
+        const token = getCookie("token");
         try {
-            return alert(token);
+            console.log(document.cookie);
             // const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id }, {
             //     Authorization: `Bearer ${token}`
             // });
@@ -161,7 +170,7 @@ const Products = () => {
             //     // Something happened in setting up the request that triggered an Error
             //     alert("Error during request setup:", error.message);
             // }
-            return alert(token);
+            console.log(token);
         }
     }
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const history = useNavigate();
+  const [cookies, setCookie] = useCookies(["user"]);
   const [auth, setAuth] = useState({
     username: "",
     password: "",
@@ -17,14 +19,15 @@ const Login = () => {
     try {
       const res = await axios.post('https://lengtith.onrender.com/api/auth/login', { ...auth }).catch(err => console.log(err));
       const data = await res.data;
-      return data;
+      setCookie("user", data.token, { path: "/" });
+      return ;
     } catch (error) {
       console.error(error);
     }
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin().then(() => history("/products"));
+    handleLogin().then(() => history("/"));
   }
   return (
     <div>
