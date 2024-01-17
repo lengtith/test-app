@@ -126,9 +126,23 @@ const Products = () => {
         }
     }
 
+    const getCookie = (name) => {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                return cookie.substring(name.length + 1);
+            }
+        }
+        return '';
+    };
+
     const handleFavorite = async (id) => {
         try {
-            const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id });
+            const token = getCookie('token');
+            const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id }, {
+                Authorization: `Bearer ${token}`
+            });
             if (res && res.data) {
                 alert("Successfully")
                 console.log(res.data);
