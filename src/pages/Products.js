@@ -128,6 +128,7 @@ const Products = () => {
 
     const handleFavorite = async (id) => {
         try {
+            axios.defaults.headers.common['Cookie'] = document.cookie;
             const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id });
             if (res && res.data) {
                 alert("Successfully")
