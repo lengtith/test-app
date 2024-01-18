@@ -19,7 +19,7 @@ const ProductUpdate = () => {
               'Authorization': cookies.user,
             }
           });
-        setUser(res.name)
+        setUser(res)
       } catch (error) {
         console.log(error);
       }
@@ -35,7 +35,7 @@ const ProductUpdate = () => {
               'Authorization': cookies.user,
             }
           })
-        setUserInfo(res.intro)
+        setUserInfo(res)
       } catch (error) {
         console.log(error);
       }
@@ -48,8 +48,8 @@ const ProductUpdate = () => {
 
   return (
     <div>
-      {user}
-      {userInfo}
+      {user.name}
+      {userInfo.intro}
     </div>
   )
 }
