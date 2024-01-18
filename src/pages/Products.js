@@ -129,7 +129,7 @@ const Products = () => {
     }
 
     const handleFavorite = async (id) => {
-        return alert(cookies.user);
+        // return alert(cookies.user);
         try {
             const headers = {
                 'Content-Type': 'application/json',
