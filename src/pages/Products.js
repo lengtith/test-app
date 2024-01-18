@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 axios.defaults.withCredentials = true;
 
 const Products = () => {
-    const [cookies] = useCookies(["token"]);
+    const [cookies] = useCookies(["user"]);
     const [selectedImages, setSelectedImages] = useState([]);
     const [previewImages, setPreviewImages] = useState([]);
     const [products, setProducts] = useState([]);
@@ -129,12 +129,13 @@ const Products = () => {
     }
 
     const handleFavorite = async (id) => {
+        return alert(cookies.user);
         try {
             const headers = {
                 'Content-Type': 'application/json',
-                Cookie: cookies.token,
+                'Authorization': `Bearer ${cookies.user}`,
             };
-
+    
             const options = {
                 headers: headers,
             };
@@ -146,15 +147,10 @@ const Products = () => {
             }
         } catch (error) {
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 alert(error.response.data.message);
             } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser
                 alert("No response received:", error.request);
             } else {
-                // Something happened in setting up the request that triggered an Error
                 alert("Error during request setup:", error.message);
             }
         }
