@@ -36,6 +36,7 @@ const ProductUpdate = () => {
             }
           })
         setUserInfo(res)
+        console.log(res)
       } catch (error) {
         console.log(error);
       }
@@ -48,8 +49,8 @@ const ProductUpdate = () => {
 
   return (
     <div>
-      <p>User: {user.name}</p>
-      <p>Intro: {userInfo.intro}</p>
+      <p>User: {user.data.name}</p>
+      <p>Intro: {userInfo.data.intro}</p>
     </div>
   )
 }

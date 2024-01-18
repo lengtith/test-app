@@ -35,7 +35,7 @@ const Products = () => {
     useEffect(() => {
 
         getProducts();
-        
+
     }, [])
 
     const handleChange = (event) => {
