@@ -21,7 +21,7 @@ const Products = () => {
     const getProducts = async () => {
         try {
             const res = await axios
-                .get("https://lengtith.onrender.com/api/fashions?page=1&limit=12", {
+                .get("http://localhost:3000/api/fashions?page=1&limit=12", {
                     withCredentials: true,
                 })
                 .catch((err) => console.log(err));
@@ -39,7 +39,7 @@ const Products = () => {
         const getUser = async () => {
             try {
                 const res = await axios
-                    .get("https://lengtith.onrender.com/api/users/user", {
+                    .get("http://localhost:3000/api/users/user", {
                         withCredentials: true,
                     })
                     .catch((err) => console.log(err));
@@ -52,7 +52,7 @@ const Products = () => {
         const getUserinfo = async () => {
             try {
                 const res = await axios
-                    .get("https://lengtith.onrender.com/api/users/info", {
+                    .get("http://localhost:3000/api/users/info", {
                         withCredentials: true,
                     })
                     .catch((err) => console.log(err));
@@ -105,7 +105,7 @@ const Products = () => {
         }
 
         try {
-            const res = await axios.post('https://lengtith.onrender.com/api/fashions', formData).catch(err => console.log(err));
+            const res = await axios.post('http://localhost:3000/api/fashions', formData).catch(err => console.log(err));
             const data = await res.data;
             if (res.status === 400 || res.status === 401) {
                 return `${data.error}`;
@@ -118,7 +118,7 @@ const Products = () => {
 
     const handleRemove = async (id) => {
         try {
-            const res = await axios.delete('https://lengtith.onrender.com/api/fashions/' + id).catch(err => console.log(err));
+            const res = await axios.delete('http://localhost:3000/api/fashions/' + id).catch(err => console.log(err));
             if (res.status === 400 || res.status === 401) {
                 return `${res.data.error}`;
             }
@@ -129,18 +129,18 @@ const Products = () => {
     }
 
     const handleFavorite = async (id) => {
-        // return alert(cookies.user);
+        
         try {
             const headers = {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${cookies.user}`,
+                'Authorization': cookies.user,
             };
     
             const options = {
                 headers: headers,
             };
 
-            const res = await axios.post('https://lengtith.onrender.com/api/favorites/', { product: id }, options);
+            const res = await axios.post('http://localhost:3000/api/favorites/', { product: id }, options);
             if (res && res.data) {
                 alert("Successfully")
                 console.log(res.data);
@@ -180,7 +180,7 @@ const Products = () => {
                                 <div className='flex justify-between border-2 border-red-600 rounded-lg p-1'>
                                     <div key={index} className='w-fit flex gap-2'>
                                         {product.images.map((previewImage, index) => (
-                                            <img key={index} src={`https://lengtith.onrender.com/uploads/products/` + previewImage} className='w-10 h-10 object-contain object-center' alt={`Preview ${index + 1}`} />
+                                            <img key={index} src={`http://localhost:3000/uploads/products/` + previewImage} className='w-10 h-10 object-contain object-center' alt={`Preview ${index + 1}`} />
                                         ))}
                                     </div>
                                     <div>
