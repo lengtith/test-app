@@ -48,8 +48,8 @@ const ProductUpdate = () => {
 
   return (
     <div>
-      {user.name}
-      {userInfo.intro}
+      <p>User: {user.name}</p>
+      <p>Intro: {userInfo.intro}</p>
     </div>
   )
 }

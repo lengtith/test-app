@@ -35,35 +35,7 @@ const Products = () => {
     useEffect(() => {
 
         getProducts();
-
-        const getUser = async () => {
-            try {
-                const res = await axios
-                    .get("https://lengtith.onrender.com/api/users/user", {
-                        withCredentials: true,
-                    })
-                    .catch((err) => console.log(err));
-                console.log(res.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        const getUserinfo = async () => {
-            try {
-                const res = await axios
-                    .get("https://lengtith.onrender.com/api/users/info", {
-                        withCredentials: true,
-                    })
-                    .catch((err) => console.log(err));
-                console.log(res.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        getUser();
-        getUserinfo();
+        
     }, [])
 
     const handleChange = (event) => {
